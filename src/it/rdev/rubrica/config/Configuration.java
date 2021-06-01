@@ -13,7 +13,7 @@ public class Configuration {
 	private final String CONFIG_FILE = "rubrica.cfg";
 	
 	private Properties prop;
-	
+
 	public static Configuration getInstance() {
 		if(instance == null) {
 			instance = new Configuration();
