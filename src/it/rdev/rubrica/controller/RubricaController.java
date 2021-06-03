@@ -12,11 +12,13 @@ import it.rdev.rubrica.model.impl.ContactDaoCore;
 import it.rdev.rubrica.model.impl.file.ContactDAOFileImpl;
 import it.rdev.rubrica.model.impl.rdbms.ContactDAOImpl;
 
+
 public class RubricaController {
 	
 	private ContactDAO dao;
 	
 	public RubricaController() {
+
 		// l'idea è che esca una scelta di questo tipo attraverso il Core 
 //		if(Configuration.getInstance().getValue(ConfigKeys.PERSISTENCE_TYPE).equals("TXT")) {  
 			//dao=new ContactDAOFileImpl();
@@ -25,6 +27,7 @@ public class RubricaController {
 //				dao = new ContactDAOImpl();	
 //			}
 		dao	= ContactDaoCore.open();
+
 	}
 
 	public List<Contact> getContactList() {
@@ -33,9 +36,6 @@ public class RubricaController {
 	
 	public String addContact(Contact c) {
 		String view = "LIST";
-		// Controlli ore lavorate
-		// Controlli anagrafica
-		// altri controlli
 		try {
 			dao.persist(c);
 		} catch (SQLException e) {
@@ -47,5 +47,19 @@ public class RubricaController {
 		}
 		return view;
 	}
+	
+	public boolean removeContact(Contact c) {
+		try {
+			return dao.delete(c);
+		} catch (SQLException  e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (IOException  e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+		return false;
+	}
 
 }
+

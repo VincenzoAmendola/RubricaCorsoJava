@@ -16,8 +16,9 @@ import it.rdev.rubrica.model.ContactDAO;
  * @author Danilo Di Nuzzo
  *
  */
-public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
-	
+
+public class ContactDAOImpl extends AbstractDAO<Contact, BigInteger> implements ContactDAO {
+
 	private final String TABLE_NAME = "contacts";
 
 	public List<Contact> getAll() {
@@ -54,7 +55,9 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
 
 	@Override
 	public boolean persist(Contact c) throws SQLException {
-		Long id = this.executeInsert(
+
+		BigInteger id = this.executeInsert(
+
 				"INSERT INTO " + TABLE_NAME + " (name, surname) VALUES (?, ?)",
 				c.getName(),
 				c.getSurname());
